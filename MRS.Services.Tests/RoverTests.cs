@@ -5,7 +5,7 @@ using Xunit;
 
 namespace MRS.Services.Tests
 {
-    public class RoverServiceTests
+    public class RoverTests
     {
         private IMapService _mapService = new MapService();
         private ILocationService _locationService = new LocationService();
@@ -21,7 +21,7 @@ namespace MRS.Services.Tests
             // Arrange
             var plateau = _mapService.ParseMap(map);
 
-            IRoverService rover = new RoverService(_locationService)
+            IRover rover = new Rover(_locationService)
             {
                 Plateau = plateau,
                 CurrentPosition = _locationService.ParseStartPoint(plateau, startingPoint),
@@ -48,7 +48,7 @@ namespace MRS.Services.Tests
         {
             var plateau = _mapService.ParseMap(map);
 
-            IRoverService rover = new RoverService(_locationService)
+            IRover rover = new Rover(_locationService)
             {
                 Plateau = plateau,
                 CurrentPosition = _locationService.ParseStartPoint(plateau, startingPoint),
@@ -68,7 +68,7 @@ namespace MRS.Services.Tests
             // Arrange
             var plateau = _mapService.ParseMap(map);
 
-            IRoverService rover = new RoverService(_locationService)
+            IRover rover = new Rover(_locationService)
             {
                 Plateau = plateau,
                 CurrentPosition = _locationService.ParseStartPoint(plateau, startingPoint),

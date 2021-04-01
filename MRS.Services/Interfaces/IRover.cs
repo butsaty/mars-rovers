@@ -5,7 +5,7 @@ using Enums = MRS.Common.Enums;
 
 namespace MRS.Services.Interfaces
 {
-    public interface IRoverService
+    public interface IRover
     {
         Position CurrentPosition { get; set; }
 

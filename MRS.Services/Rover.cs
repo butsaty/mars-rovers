@@ -6,11 +6,11 @@ using Enums = MRS.Common.Enums;
 
 namespace MRS
 {
-    public class RoverService : IRoverService
+    public class Rover : IRover
     {
         private readonly ILocationService _locationService;
 
-        public RoverService(ILocationService locationService)
+        public Rover(ILocationService locationService)
         {
             _locationService = locationService;
         }

@@ -31,12 +31,12 @@ namespace MRS
 
         private void Run()
         {
-            var roverLocations = new List<Position>();
+            var rovers = new List<IRover>();
             var plateau = CreatePlateau();
 
-            while (roverLocations.Count < _roverCount)
+            while (rovers.Count < _roverCount)
             {
-                Console.WriteLine($"Rover #{ roverLocations.Count + 1}");
+                Console.WriteLine($"Rover #{ rovers.Count + 1}");
 
                 var currentPosition = CreateStartPoint(plateau);
                 var commands = CreateCommands();
@@ -45,7 +45,7 @@ namespace MRS
                 try
                 {
                     rover.Move();
-                    roverLocations.Add(rover.CurrentPosition);
+                    rovers.Add(rover);
                 }
                 catch (Exception ex)
                 {
@@ -64,7 +64,7 @@ namespace MRS
                 }
             }
 
-            PrintRoverPositions(roverLocations);
+            PrintRover(rovers);
 
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
@@ -146,23 +146,23 @@ namespace MRS
             return commands;
         }
 
-        private IRoverService CreateRover(Plateau plateau, Position startPoint, IEnumerable<Enums.CommandType> commands) => new RoverService(_locationService)
+        private IRover CreateRover(Plateau plateau, Position startPoint, IEnumerable<Enums.CommandType> commands) => new Rover(_locationService)
         {
             Plateau = plateau,
             CurrentPosition = startPoint,
             Commands = commands
         };
 
-        private void PrintRoverPositions(IEnumerable<Position> positions)
+        private void PrintRover(IEnumerable<IRover> rovers)
         {
             Console.WriteLine("------------------");
             Console.WriteLine("Rover's positions:");
 
             int roverNumber = 1;
 
-            foreach (var location in positions)
+            foreach (var rover in rovers)
             {
-                Console.WriteLine($"Rover #{roverNumber++ }: {location.X} {location.Y} {location.Direction}");
+                Console.WriteLine($"Rover #{roverNumber++ }: {rover.CurrentPosition.X} {rover.CurrentPosition.Y} {rover.CurrentPosition.Direction}");
             }
 
             Console.WriteLine("------------------");
